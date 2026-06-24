@@ -1,0 +1,7 @@
+docker buildx build \
+  --platform linux/arm64,linux/amd64 \
+  -t haoxuan8855/debian-pm2:latest \
+  --push .
+
+
+docker buildx build --platform linux/arm64,linux/amd64 -t haoxuan8855/debian-pm2:latest --push .
