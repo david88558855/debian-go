@@ -19,9 +19,6 @@ USER root
 
 # 安装curl和SSH
 RUN apt update && apt install -y curl openssh-server
-    
-# 创建用户haoxuan，并设置密码
-RUN useradd -m -g root haoxuan && echo "haoxuan:q09995" | chpasswd
 
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
  && sed -i 's/#Port 22/Port 6633/' /etc/ssh/sshd_config \
@@ -30,17 +27,10 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 # 创建root用户密码
 RUN mkdir -p /var/run/sshd && echo 'root:q09995' | chpasswd
 
-# 安装Node.js环境（pm2依赖Node.js）
-RUN apt update \
-    && curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
-    && apt install -y nodejs && rm -rf /var/lib/apt/lists/*
-
-# 安装 PM2
-RUN npm install -g pm2
-
-COPY ./pm2-root.service /etc/systemd/system/
-
-RUN systemctl enable pm2-root
+# 安装GO环境
+RUN apt update && \
+    apt install golang-go && \
+    go version
 
 # 容器启动时运行的命令
 ENTRYPOINT ["/usr/lib/systemd/systemd"]
