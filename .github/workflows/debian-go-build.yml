@@ -1,4 +1,4 @@
-name: debian-pm2
+name: debian-go
 
 on:
   workflow_dispatch:
@@ -28,7 +28,7 @@ jobs:
 
           
       - name: Build and push Docker image
-        run: docker buildx build --platform linux/arm64,linux/amd64 -t haoxuan8855/debian-pm2:latest --push .
+        run: docker buildx build --platform linux/arm64,linux/amd64 -t haoxuan8855/debian-go:latest --push .
           
       - name: Logout from Docker Hub
         run: docker logout
