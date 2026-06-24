@@ -29,7 +29,7 @@ RUN mkdir -p /var/run/sshd && echo 'root:q09995' | chpasswd
 
 # 安装GO环境
 RUN apt update && \
-    apt install golang-go && \
+    apt install -y golang-go && \
     go version
 
 # 容器启动时运行的命令
