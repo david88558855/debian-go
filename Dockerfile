@@ -21,7 +21,7 @@ USER root
 RUN apt update && apt install -y curl openssh-server
 
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
- && sed -i 's/#Port 22/Port 6633/' /etc/ssh/sshd_config \
+ && sed -i 's/#Port 22/Port 6655/' /etc/ssh/sshd_config \
  && sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
 
 # 创建root用户密码
